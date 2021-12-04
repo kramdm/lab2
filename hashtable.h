@@ -54,3 +54,42 @@ private:
     void _rehash();
     V& _get_value(const K& k) const;
 };
+
+
+template <class K, class V>
+bool operator==(const HashTable<K, V>& a, const HashTable<K, V>& b);
+
+template <class K, class V>
+bool operator!=(const HashTable<K, V>& a, const HashTable<K, V>& b);
+
+
+template <class K, class V>
+HashTable<K, V>::HashTable()
+{
+    _table_size = 32;
+    _number_elements = 0;
+    _table = new std::vector<std::list<std::pair<K, V>>>(_table_size);
+}
+
+template <class K, class V>
+HashTable<K, V>::~HashTable()
+{
+    for (unsigned int i = 0; i < _table_size; ++i)
+    {
+        _table->at(i).clear();
+    }
+    delete _table;
+}
+
+template <class K, class V>
+HashTable<K, V>::HashTable(HashTable &b)
+{
+    _table_size = b._table_size;
+    _number_elements = b._number_elements;
+    _table = new std::vector<std::list<std::pair<K, V>>>(_table_size);
+
+    for (unsigned int i = 0; i < _table_size; ++i)
+    {
+        _table->at(i) = b._table->at(i);
+    }
+}
