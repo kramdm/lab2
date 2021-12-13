@@ -178,8 +178,7 @@ TEST_F(TestHashTable, TestCompareOperators)
     new_table.erase("Max");
     ASSERT_FALSE(table == new_table);
 
-    new_table.insert("Max", {18, 50});
-    ASSERT_TRUE(table == new_table);
+    
 }
 
 TEST_F(TestHashTable, TestMove)
